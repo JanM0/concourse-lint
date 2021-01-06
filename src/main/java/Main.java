@@ -2,6 +2,7 @@ public class Main {
     public static void main(String[] args) {
         linelength();
         methodlength();
+        System.out.println("Java Main");
     }
 
     private static void methodlength() {
