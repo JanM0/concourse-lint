@@ -1,0 +1,18 @@
+# fly -t tutorial login --concourse-url http://127.0.0.1:8080 -u admin -p admin
+# fly -t tutorial sp -c pipeline.yml -p git-resource
+---
+resources:
+  - name: git-resource
+    type: git
+    source:
+      uri: https://github.com/JanM0/concourse-lint.git
+      branch: main
+
+jobs:
+  - name: git-has-changed
+    public: true
+    plan:
+      - get: git-resource
+        trigger: true
+      - task: message
+        file: git-resource/ci/change_message.yml
